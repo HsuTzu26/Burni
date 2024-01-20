@@ -45,22 +45,21 @@ let Bundle = {
         "system": "https://www.cdc.gov.tw/",
         "value": "TWCR-SF-2023-09-19T18:35:20+08:00"
     },
-    "type": "transcation",
+    "type": "document",
     "timestamp": "2023-09-19T18:35:20+08:00",
-    "entry": []
+    "entry": [
+    ]
 }
-Bundle.entry[0] = DATA
-
-console.log(JSON.stringify(Bundle, null, 4))
+Bundle["entry"] = DATA
 // POST
-// let postFhirURL = fhirURL.split(`${resType}/${resID}`)[0]
+let postFhirURL = fhirURL.split(`${resType}/${resID}`)[0]
 
-// const postFhir = axios.post(postFhirURL, Bundle);
-// postFhir
-//     .then((res) => console.log(res.data))
-//     .catch((e) => {
-//         console.log(e.response.data);
-//     });
+const postFhir = axios.post(postFhirURL, Bundle);
+postFhir
+    .then((res) => console.log(res.data))
+    .catch((e) => {
+        console.log(e.response.data);
+    });
 
 const path = __dirname + "/json/result.json";
 const json = JSON.stringify(DATA, null, 4);
